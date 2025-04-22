@@ -10,17 +10,13 @@
 
   <depend>rclcpp</depend>
   
-  <!-- Robotnik packages -->
-
-  <!-- ROS2 packages -->
-  <exec_depend>controller_manager</exec_depend>
-  <exec_depend>joint_state_broadcaster</exec_depend>
-
-  <!-- Packages for teleoperation -->
-  <exec_depend>joy</exec_depend>
-  <depend>twist_stamper</depend>
-  <exec_depend>teleop_twist_joy</exec_depend>
-  <exec_depend>twist_mux</exec_depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>ament_index_cpp</depend>
+  <depend>tf2</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>robot_localization</depend>
 
   <export>
     <build_type>ament_cmake</build_type>
