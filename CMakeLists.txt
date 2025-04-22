@@ -14,6 +14,7 @@ find_package(ament_index_cpp REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(robot_localization REQUIRED)
 find_package(ament_cmake_auto REQUIRED)
 
 install(DIRECTORY launch include src  
@@ -27,6 +28,7 @@ set(dependencies
   ament_index_cpp
   tf2
   tf2_geometry_msgs
+  robot_localization
 )
 
 include_directories(include)

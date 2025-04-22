@@ -10,10 +10,19 @@ using std::placeholders::_1;
 
 IMUOrientation::IMUOrientation(): Node("imu_orientation")
 {
+  declare_parameter("imu_topic", "/imu");
+  std::string imu_topic = get_parameter("imu_topic").as_string();
+
+
+    rclcpp::QoS imu_qos(rclcpp::KeepLast(1));
+    imu_qos.best_effort();
     rclcpp::SubscriptionOptions options;
+
+
+
   // Subscription to IMU data to get the robot's orientation
   imu_sub_ = create_subscription<sensor_msgs::msg::Imu>(
-        "/imu/data", 100, std::bind(&IMUOrientation::imu_callback, this, _1), options);
+    imu_topic, imu_qos, std::bind(&IMUOrientation::imu_callback, this, _1), options);
 }
 
 IMUOrientation::~IMUOrientation()
