@@ -17,7 +17,7 @@ find_package(std_msgs REQUIRED)
 find_package(robot_localization REQUIRED)
 find_package(ament_cmake_auto REQUIRED)
 
-install(DIRECTORY launch include src  
+install(DIRECTORY config launch   
         DESTINATION share/${PROJECT_NAME})
 
 set(dependencies

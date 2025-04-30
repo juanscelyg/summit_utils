@@ -12,13 +12,10 @@ IMUOrientation::IMUOrientation(): Node("imu_orientation")
 {
   declare_parameter("imu_topic", "/imu");
   std::string imu_topic = get_parameter("imu_topic").as_string();
-
-
-    rclcpp::QoS imu_qos(rclcpp::KeepLast(1));
-    imu_qos.best_effort();
-    rclcpp::SubscriptionOptions options;
-
-
+  
+  rclcpp::QoS imu_qos(rclcpp::KeepLast(1));
+  imu_qos.best_effort();
+  rclcpp::SubscriptionOptions options;
 
   // Subscription to IMU data to get the robot's orientation
   imu_sub_ = create_subscription<sensor_msgs::msg::Imu>(
@@ -44,9 +41,15 @@ void IMUOrientation::imu_callback(const sensor_msgs::msg::Imu::SharedPtr msg)
     msg->orientation.w);
   tf2::Matrix3x3 m(q);
   // Extract roll, pitch, and yaw from IMU quaternion
+  // m.getRPY(roll_, pitch_, yaw_);
+  RCLCPP_INFO(this->get_logger(), "*---- RPY ----*");
   m.getRPY(roll_, pitch_, yaw_);
+  RCLCPP_INFO(this->get_logger(), "roll: '%f'", roll_);
+  RCLCPP_INFO(this->get_logger(), "pitch: '%f'", pitch_);
+  RCLCPP_INFO(this->get_logger(), "yaw: '%f'", yaw_);
   // Mark IMU data as ready
-    RCLCPP_INFO(this->get_logger(), "*--------*");
+  RCLCPP_INFO(this->get_logger(), "*---- Euler YPR ----*");
+  m.getEulerYPR(yaw_, pitch_, roll_);
   RCLCPP_INFO(this->get_logger(), "roll: '%f'", roll_);
   RCLCPP_INFO(this->get_logger(), "pitch: '%f'", pitch_);
   RCLCPP_INFO(this->get_logger(), "yaw: '%f'", yaw_);
