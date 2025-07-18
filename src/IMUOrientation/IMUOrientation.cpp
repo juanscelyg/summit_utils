@@ -47,12 +47,6 @@ void IMUOrientation::imu_callback(const sensor_msgs::msg::Imu::SharedPtr msg)
   RCLCPP_INFO(this->get_logger(), "roll: '%f'", roll_);
   RCLCPP_INFO(this->get_logger(), "pitch: '%f'", pitch_);
   RCLCPP_INFO(this->get_logger(), "yaw: '%f'", yaw_);
-  // Mark IMU data as ready
-  RCLCPP_INFO(this->get_logger(), "*---- Euler YPR ----*");
-  m.getEulerYPR(yaw_, pitch_, roll_);
-  RCLCPP_INFO(this->get_logger(), "roll: '%f'", roll_);
-  RCLCPP_INFO(this->get_logger(), "pitch: '%f'", pitch_);
-  RCLCPP_INFO(this->get_logger(), "yaw: '%f'", yaw_);
 }
 
 } // namespace imu_orientation
